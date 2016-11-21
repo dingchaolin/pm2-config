@@ -1,0 +1,46 @@
+{
+  "apps": [
+    {
+      "name": "YG-API",
+      "script": "app.js"
+    }
+  ],
+  "deploy": {
+    "prod-c": {
+      "user": "root",
+      "host": "123.59.75.68",
+      "port": "2203",
+      "ref": "origin/master",
+      "repo": "git@git.yuguo.cn:server/server-api.git",
+      "path": "/data/YG-API-PROD",
+      "post-deploy": "yarn; npm run release; pm2 startOrReload startup.json --env production",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "prod-d": {
+      "user": "root",
+      "host": "123.59.75.68",
+      "port": "2204",
+      "ref": "origin/master",
+      "repo": "git@git.yuguo.cn:server/server-api.git",
+      "path": "/data/YG-API-PROD",
+      "post-deploy": "yarn; npm run release; pm2 startOrReload startup.json --env production",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "dev": {
+      "user": "node",
+      "host": "123.59.75.68",
+      "port": "2501",
+      "ref": "origin/feature/dcl_ChannelOptimize",
+      "repo": "git@git.yuguo.cn:server/server-api.git",
+      "path": "/home/node/YG-API-DEV",
+      "post-deploy": "npm install; pm2 startOrReload startup.json --env dev",
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    }
+  }
+}

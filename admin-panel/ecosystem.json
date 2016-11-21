@@ -1,0 +1,34 @@
+{
+  "apps": [
+    {
+      "name": "YG-ADMIN-PANEL",
+      "script": "bin/www.js"
+    }
+  ],
+  "deploy": {
+    "prod": {
+      "user": "node",
+      "host": "123.59.75.68",
+      "port": "2301",
+      "ref": "origin/master",
+      "repo": "gitlab-deploy-admin-panel:server/yg-admin-panel.git",
+      "path": "/home/node/YG-ADMIN-PANEL-PROD",
+      "post-deploy": "npm install ; npm run release; pm2 startOrRestart ecosystem.json --env prod",
+      "env": {
+        "NODE_ENV": "prod"
+      }
+    },
+    "dev": {
+      "user": "node",
+      "host": "123.59.75.68",
+      "port": "2501",
+      "ref": "origin/feature/channel",
+      "repo": "gitlab-deploy-admin-panel:server/yg-admin-panel.git",
+      "path": "/home/node/YG-ADMIN-PANEL-DEV",
+      "post-deploy": "npm install ; pm2 startOrRestart ecosystem.json --env dev",
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    }
+  }
+}
